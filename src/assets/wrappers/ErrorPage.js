@@ -1,15 +1,16 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.main`
   text-align: center;
+  display: grid;
+  place-items: center;
+  /* align-items: center;
+  justify-content: center; */
   img {
     max-width: 600px;
     display: block;
     margin-bottom: 2rem;
   }
-  display: flex;
-  align-items: center;
-  justify-content: center;
   h3 {
     margin-bottom: 0.5rem;
   }
@@ -23,6 +24,6 @@ const Wrapper = styled.main`
     text-decoration: underline;
     text-transform: capitalize;
   }
-`
+`;
 
-export default Wrapper
+export default Wrapper;
