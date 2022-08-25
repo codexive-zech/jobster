@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { registerUser, loginUser } from "../features/user/userSlice";
 
 const initialFormState = {
   name: "",
@@ -11,6 +14,8 @@ const initialFormState = {
 
 const Register = () => {
   const [values, setValues] = useState(initialFormState);
+  const { isLoading, user } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   const handleValues = (e) => {
     const key = e.target.name;
@@ -22,8 +27,14 @@ const Register = () => {
     e.preventDefault();
     const { name, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
-      console.log("Please Provide Credentials");
+      toast.error("Please Provide Credentials");
+      return;
     }
+    if (isMember) {
+      dispatch(loginUser({ email, password }));
+      return;
+    }
+    dispatch(registerUser({ name, email, password }));
   };
 
   const handleMemberToggle = () => {
@@ -34,7 +45,7 @@ const Register = () => {
       {/* Form */}
       <form className="form" onSubmit={handleSubmit}>
         <Logo />
-        <h3>{values.isMember ? "Login" : "Register"}</h3>
+        <h3>{values.isMember ? "Login" : "Sign Up"}</h3>
         {/* Name Field */}
         {values.isMember ? null : (
           <FormRow
@@ -60,13 +71,13 @@ const Register = () => {
         />
         <button className="btn btn-block">Submit</button>
         <p>
-          {values.isMember ? "Not a member yet?" : "Already a member"}
+          {values.isMember ? "Not a member yet?" : "Already a member?"}
           <button
             type="button"
             className="member-btn"
             onClick={handleMemberToggle}
           >
-            {values.isMember ? "Register" : "Login"}
+            {values.isMember ? "Sign Up" : "Login"}
           </button>
         </p>
       </form>
