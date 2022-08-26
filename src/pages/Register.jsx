@@ -49,7 +49,7 @@ const Register = () => {
         navigate("/");
       }, 3000);
     }
-  }, [user]);
+  }, [user]); // navigate from register and login page to the dashboard page if the user exist
   return (
     <Wrapper className="full-page">
       {/* Form */}
