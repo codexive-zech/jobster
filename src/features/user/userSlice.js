@@ -40,6 +40,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   extraReducers: {
+    // register user ajax request
     [registerUser.pending]: (state) => {
       state.isLoading = true;
     },
@@ -54,6 +55,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
+    // Login user ajax request
     [loginUser.pending]: (state) => {
       state.isLoading = true;
     },
