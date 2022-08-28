@@ -4,6 +4,7 @@ import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { Logo } from "../components";
 import { toggleSidebar, logoutUser } from "../features/user/userSlice";
+
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <Wrapper>
-      <div className="nav-center">
+      <section className="nav-center">
         <button
           type="button"
           className="toggle-btn"
@@ -42,7 +43,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
     </Wrapper>
   );
 };
