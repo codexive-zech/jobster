@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   @media (min-width: 992px) {
@@ -33,7 +33,7 @@ const Wrapper = styled.aside`
   .close-btn {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     background: transparent;
     border-color: transparent;
     font-size: 2rem;
@@ -42,8 +42,7 @@ const Wrapper = styled.aside`
   }
   .nav-links {
     padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
   }
   .nav-link {
     display: flex;
@@ -72,5 +71,5 @@ const Wrapper = styled.aside`
   .active .icon {
     color: var(--primary-500);
   }
-`
-export default Wrapper
+`;
+export default Wrapper;

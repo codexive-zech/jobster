@@ -16,7 +16,8 @@ const NavLinks = ({ toggleSidebar }) => {
               return isActive ? "nav-link active" : "nav-link";
             }}
           >
-            <span className="icon">{icon}</span> {text}
+            <span className="icon">{icon}</span>
+            {text}
           </NavLink>
         );
       })}
