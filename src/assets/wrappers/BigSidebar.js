@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   display: none;
@@ -9,16 +9,17 @@ const Wrapper = styled.aside`
       background: var(--white);
       min-height: 100vh;
       height: 100%;
-      width: 250px;
+      width: 18vw;
       margin-left: -250px;
       transition: var(--transition);
+    }
+
+    .show-sidebar {
+      margin-left: 0;
     }
     .content {
       position: sticky;
       top: 0;
-    }
-    .show-sidebar {
-      margin-left: 0;
     }
     header {
       height: 6rem;
@@ -28,8 +29,7 @@ const Wrapper = styled.aside`
     }
     .nav-links {
       padding-top: 2rem;
-      display: flex;
-      flex-direction: column;
+      display: grid;
     }
     .nav-link {
       display: flex;
@@ -62,5 +62,5 @@ const Wrapper = styled.aside`
       color: var(--primary-500);
     }
   }
-`
-export default Wrapper
+`;
+export default Wrapper;
