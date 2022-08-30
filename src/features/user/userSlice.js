@@ -92,7 +92,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.user = user;
       toast.success("User Updated Successfully");
-      setUserToLocalStorage();
+      setUserToLocalStorage(user);
     },
     [updateUserDetails.rejected]: (state, { payload }) => {
       state.isLoading = false;
