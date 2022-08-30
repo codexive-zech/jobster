@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { SmallSidebar, Navbar, BigSidebar } from "../../components";
+import { SmallSidebar, Navbar, BigSidebar, Footer } from "../../components";
 import Wrapper from "../../assets/wrappers/SharedLayout";
 
 const SharedLayout = () => {
@@ -15,6 +15,7 @@ const SharedLayout = () => {
             <div className="dashboard-page">
               <Outlet />
             </div>
+            <Footer />
           </div>
         </main>
       </Wrapper>

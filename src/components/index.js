@@ -5,6 +5,7 @@ import SmallSidebar from "./SmallSidebar";
 import Navbar from "./Navbar";
 import NavLinks from "./NavLinks";
 import FormRowSelect from "./FormRowSelect";
+import Footer from "./Footer";
 
 export {
   Logo,
@@ -14,4 +15,5 @@ export {
   Navbar,
   NavLinks,
   FormRowSelect,
+  Footer,
 };
