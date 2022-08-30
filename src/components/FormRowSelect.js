@@ -1,6 +1,12 @@
 import React from "react";
 
-const FormRowSelect = ({ name, value, handleChange, labelText, lists }) => {
+const FormRowSelect = ({
+  name,
+  value,
+  handleChange,
+  labelText,
+  listOptions,
+}) => {
   return (
     <div className="form-row">
       <label htmlFor={name} className="form-label">
@@ -12,7 +18,7 @@ const FormRowSelect = ({ name, value, handleChange, labelText, lists }) => {
         value={value}
         onChange={handleChange}
       >
-        {lists.map((listValue, index) => {
+        {listOptions.map((listValue, index) => {
           return (
             <option value={listValue} key={index}>
               {listValue}

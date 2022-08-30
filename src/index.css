@@ -319,3 +319,18 @@ ul {
     margin-right: 0.5rem;
   }
 }
+
+.footer {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+}
+
+@media screen and (min-width: 992px) {
+  .footer {
+    margin-top: 4.5rem;
+  }
+}
