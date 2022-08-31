@@ -1,7 +1,7 @@
 import React from "react";
 
 const Job = () => {
-  return <h1>Job</h1>;
+  return <h1>Single Job</h1>;
 };
 
 export default Job;
