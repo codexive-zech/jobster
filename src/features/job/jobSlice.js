@@ -52,6 +52,7 @@ const jobSlice = createSlice({
       };
     },
   },
+  // create New Jobs
   extraReducers: {
     [createJob.pending]: (state) => {
       state.isLoading = true;
