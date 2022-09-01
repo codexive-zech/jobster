@@ -5,7 +5,7 @@ import { Job, Loading } from "../components";
 import { getAllJobs } from "../features/allJobs/allJobsSlice";
 
 const JobsContainer = () => {
-  const { jobs, isLoading } = useSelector((store) => store.allJobs);
+  const { jobs, isLoading, totalJobs } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const JobsContainer = () => {
   }
   return (
     <Wrapper>
-      <h5>Job Info</h5>
+      <h5>{totalJobs} Job Available</h5>
       <div className="jobs">
         {jobs.map((job) => {
           console.log(job);
