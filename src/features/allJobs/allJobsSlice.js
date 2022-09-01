@@ -31,6 +31,7 @@ export const getAllJobs = createAsyncThunk(
           authorization: `Bearer ${thunkApi.getState().user.user.token}`,
         },
       });
+
       return resp.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.data.msg);
@@ -57,9 +58,10 @@ const allJobsSlice = createSlice({
       state.isLoading = true;
     },
     [getAllJobs.fulfilled]: (state, { payload }) => {
-      const { jobs } = payload; // getting back the list of jobs earlier created into the job object
+      const { jobs, totalJobs } = payload; // getting back the list of jobs earlier created into the job object
       state.isLoading = false;
       state.jobs = jobs;
+      state.totalJobs = totalJobs;
     },
     [getAllJobs.rejected]: (state, { payload }) => {
       state.isLoading = false;
