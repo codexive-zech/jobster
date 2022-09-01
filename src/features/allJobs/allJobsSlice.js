@@ -31,7 +31,6 @@ export const getAllJobs = createAsyncThunk(
           authorization: `Bearer ${thunkApi.getState().user.user.token}`,
         },
       });
-
       return resp.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.data.msg);
