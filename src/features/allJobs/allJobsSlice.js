@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../../utils/customFetch";
 import { toast } from "react-toastify";
+import { getAllJobsThunk, getAllStatsThunk } from "./allJobThunk";
 
 const initialFilterSearch = {
   search: "",
@@ -23,15 +24,12 @@ const initialState = {
 
 export const getAllJobs = createAsyncThunk(
   "allJobs/getAllJobs",
-  async (_, thunkApi) => {
-    let url = "/jobs";
-    try {
-      const resp = await customFetch.get(url);
-      return resp.data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.response.data.msg);
-    }
-  }
+  getAllJobsThunk
+);
+
+export const getJobStats = createAsyncThunk(
+  "allJobs/getJobStats",
+  getAllStatsThunk
 );
 
 const allJobsSlice = createSlice({
@@ -62,10 +60,24 @@ const allJobsSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
+    // get stats
+    [getJobStats.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getJobStats.fulfilled]: (state, { payload }) => {
+      const { defaultStats, monthlyApplications } = payload;
+      state.isLoading = false;
+      state.stats = defaultStats;
+      state.monthlyApplication = monthlyApplications;
+    },
+    [getJobStats.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
   },
 });
 
-export const { clearJobFilter, showLoading, hideLoading } =
+export const { clearJobFilter, showLoading, hideLoading, statsInfoDefault } =
   allJobsSlice.actions;
 
 export default allJobsSlice.reducer;

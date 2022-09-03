@@ -38,6 +38,7 @@ const AddJob = () => {
       toast.error("Please Fill Out All Field");
       return;
     }
+
     if (isEditing) {
       dispatch(
         editJob({
