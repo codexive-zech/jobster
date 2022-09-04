@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/customFetch";
 import { toast } from "react-toastify";
 import {
   getUserFromLocalStorage,
   setUserToLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorageData";
+import { statsInfoDefault } from "../allJobs/allJobsSlice";
 import {
   loginUserThunk,
   registerUserThunk,

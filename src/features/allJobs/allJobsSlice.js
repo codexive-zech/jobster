@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { getAllJobsThunk, getAllStatsThunk } from "./allJobThunk";
 
 const initialFilterSearch = {
   search: "",
@@ -22,19 +23,12 @@ const initialState = {
 
 export const getAllJobs = createAsyncThunk(
   "allJobs/getAllJobs",
-  async (_, thunkApi) => {
-    let url = "/jobs";
-    try {
-      const resp = await customFetch.get(url, {
-        headers: {
-          authorization: `Bearer ${thunkApi.getState().user.user.token}`,
-        },
-      });
-      return resp.data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.response.data.msg);
-    }
-  }
+  getAllJobsThunk
+);
+
+export const getJobStats = createAsyncThunk(
+  "allJobs/getJobStats",
+  getAllStatsThunk
 );
 
 const allJobsSlice = createSlice({
@@ -67,8 +61,23 @@ const allJobsSlice = createSlice({
       state.jobs = jobs;
       state.totalJobs = totalJobs;
       state.numOfPages = numOfPages;
+
     },
     [getAllJobs.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    // get stats
+    [getJobStats.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getJobStats.fulfilled]: (state, { payload }) => {
+      const { defaultStats, monthlyApplications } = payload;
+      state.isLoading = false;
+      state.stats = defaultStats;
+      state.monthlyApplication = monthlyApplications;
+    },
+    [getJobStats.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },
@@ -82,5 +91,6 @@ export const {
   handleChange,
   changePage,
 } = allJobsSlice.actions;
+
 
 export default allJobsSlice.reducer;
