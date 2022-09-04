@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/customFetch";
 import { toast } from "react-toastify";
 
 const initialFilterSearch = {
@@ -42,14 +41,20 @@ const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
   reducers: {
-    clearJobFilter: () => {
-      return initialFilterSearch;
-    },
     showLoading: (state) => {
       state.isLoading = true;
     },
     hideLoading: (state) => {
       state.isLoading = false;
+    },
+    clearJobFilter: (state) => {
+      return { ...state, ...initialFilterSearch };
+    },
+    handleChange: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
+    changePage: (state, { payload }) => {
+      state.page = payload;
     },
   },
   extraReducers: {
@@ -57,9 +62,11 @@ const allJobsSlice = createSlice({
       state.isLoading = true;
     },
     [getAllJobs.fulfilled]: (state, { payload }) => {
-      const { jobs } = payload; // getting back the list of jobs earlier created into the job object
+      const { jobs, totalJobs, numOfPages } = payload; // getting back the list of jobs earlier created into the job object
       state.isLoading = false;
       state.jobs = jobs;
+      state.totalJobs = totalJobs;
+      state.numOfPages = numOfPages;
     },
     [getAllJobs.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -68,7 +75,12 @@ const allJobsSlice = createSlice({
   },
 });
 
-export const { clearJobFilter, showLoading, hideLoading } =
-  allJobsSlice.actions;
+export const {
+  clearJobFilter,
+  showLoading,
+  hideLoading,
+  handleChange,
+  changePage,
+} = allJobsSlice.actions;
 
 export default allJobsSlice.reducer;

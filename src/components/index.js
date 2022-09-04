@@ -12,6 +12,13 @@ import Job from "./Job";
 import Loading from "./Loading";
 import JobInfo from "./JobInfo";
 
+import StatsContainer from "./StatsContainer";
+import ChartContainer from "./ChartContainer";
+import StatsItem from "./StatsItem";
+import BarChart from "./BarChart";
+import AreaChart from "./AreaChart";
+import PageBtnContainer from "./PageBtnContainer";
+
 export {
   Logo,
   FormRow,
@@ -26,4 +33,10 @@ export {
   Job,
   Loading,
   JobInfo,
+  StatsContainer,
+  ChartContainer,
+  StatsItem,
+  BarChart,
+  AreaChart,
+  PageBtnContainer,
 };
