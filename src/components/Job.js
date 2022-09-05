@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { JobInfo } from "./index";
 import moment from "moment";
-import { deleteJob, setJobEdit } from "../features/job/jobSlice";
 const Job = ({
   _id,
   company,
@@ -38,25 +37,14 @@ const Job = ({
             <Link
               to="/add-job"
               className="btn edit-btn"
-              onClick={() =>
-                dispatch(
-                  setJobEdit({
-                    editJobId: _id,
-                    company,
-                    position,
-                    status,
-                    jobType,
-                    jobLocation,
-                  })
-                )
-              }
+              onClick={() => dispatch()}
             >
               Edit
             </Link>
             <button
               type="button"
               className="btn delete-btn"
-              onClick={() => dispatch(deleteJob(_id))}
+              onClick={() => console.log("Delete clicked")}
             >
               Delete
             </button>
