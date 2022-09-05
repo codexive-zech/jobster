@@ -5,10 +5,6 @@ import { Job, Loading, PageBtnContainer } from "../components";
 import { getAllJobs } from "../features/allJobs/allJobsSlice";
 
 const JobsContainer = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cbf9403ac9ea22aeb9fc56d1da9855a651044e8
   const { jobs, isLoading, totalJobs, numOfPages } = useSelector(
     (store) => store.allJobs
   );
@@ -34,18 +30,10 @@ const JobsContainer = () => {
   }
   return (
     <Wrapper>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cbf9403ac9ea22aeb9fc56d1da9855a651044e8
       <h5>
         {totalJobs} {jobs.length > 1 ? "Jobs" : "Job"} Available
       </h5>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cbf9403ac9ea22aeb9fc56d1da9855a651044e8
       <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} />;

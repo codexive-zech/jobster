@@ -16,12 +16,6 @@ import ChartContainer from "./ChartContainer";
 import StatsItem from "./StatsItem";
 import BarChart from "./BarChart";
 import AreaChart from "./AreaChart";
-
-import StatsContainer from "./StatsContainer";
-import ChartContainer from "./ChartContainer";
-import StatsItem from "./StatsItem";
-import BarChart from "./BarChart";
-import AreaChart from "./AreaChart";
 import PageBtnContainer from "./PageBtnContainer";
 
 export {
