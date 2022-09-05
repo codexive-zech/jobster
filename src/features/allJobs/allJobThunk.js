@@ -1,10 +1,14 @@
 import customFetch from "../../utils/customFetch";
 
 export const getAllJobsThunk = async (_, thunkApi) => {
-  let url = "/jobs";
+  const { page, search, searchStatus, searchType, sort } =
+    thunkApi.getState().allJobs;
+  let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
   try {
     const resp = await customFetch.get(url);
-    console.log(resp.data);
     return resp.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.response.data.msg);
