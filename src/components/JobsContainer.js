@@ -5,7 +5,6 @@ import { Job, Loading, PageBtnContainer } from "../components";
 import { getAllJobs } from "../features/allJobs/allJobsSlice";
 
 const JobsContainer = () => {
-
   const { jobs, isLoading, totalJobs, numOfPages } = useSelector(
     (store) => store.allJobs
   );
@@ -31,11 +30,9 @@ const JobsContainer = () => {
   }
   return (
     <Wrapper>
-
       <h5>
         {totalJobs} {jobs.length > 1 ? "Jobs" : "Job"} Available
       </h5>
-
 
       <div className="jobs">
         {jobs.map((job) => {
