@@ -120,7 +120,7 @@ const AddJob = () => {
               onClick={submitAddedJob}
               disabled={isLoading}
             >
-              Submit
+              {isEditing ? "Edit" : "Submit"}
             </button>
           </div>
         </div>
