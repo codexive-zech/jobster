@@ -38,17 +38,18 @@ const Job = ({
             <Link
               to="/add-job"
               className="btn edit-btn"
-              onClick={() =>
-                dispatch(
-                  setJobEdit({
-                    editJobId: _id,
-                    company,
-                    position,
-                    status,
-                    jobType,
-                    jobLocation,
-                  })
-                )
+              onClick={
+                () =>
+                  dispatch(
+                    setJobEdit({
+                      editJobId: _id,
+                      company,
+                      position,
+                      status,
+                      jobType,
+                      jobLocation,
+                    })
+                  ) // set jobId and returned back all the values form the server
               }
             >
               Edit
@@ -56,7 +57,7 @@ const Job = ({
             <button
               type="button"
               className="btn delete-btn"
-              onClick={() => dispatch(deleteJob(_id))}
+              onClick={() => dispatch(deleteJob(_id))} // handle delete job DELETe request
             >
               Delete
             </button>

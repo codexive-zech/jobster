@@ -22,20 +22,20 @@ const AddJob = () => {
     statusOptions,
     isEditing,
     editJobId,
-  } = useSelector((store) => store.job);
-  const { user } = useSelector((store) => store.user);
+  } = useSelector((store) => store.job); // picking state available in the job Slice store
+  const { user } = useSelector((store) => store.user); // picking state in the userSlice store
   const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    dispatch(handleChange({ name, value }));
+    dispatch(handleChange({ name, value })); // changing the input field to a new value
   };
 
   const submitAddedJob = (e) => {
     e.preventDefault();
     if (!position || !company || !jobLocation) {
-      toast.error("Please Fill Out All Field");
+      toast.error("Please Fill Out All Field"); // display if all fields are empty
       return;
     }
 
@@ -49,12 +49,12 @@ const AddJob = () => {
             jobLocation,
             status,
             jobType,
-          },
+          }, // set the jobId and get back the job obj available
         })
       );
       return;
-    }
-    dispatch(createJob({ position, company, jobLocation, status, jobType }));
+    } // if edit is true handle edit job PATCH request if all field is provided (get back the job obj)
+    dispatch(createJob({ position, company, jobLocation, status, jobType })); // handle create job POST request
   };
 
   useEffect(() => {
@@ -68,21 +68,21 @@ const AddJob = () => {
       <form className="form">
         <h3>{isEditing ? "Editing Job" : "Add Job"}</h3>
         <div className="form-center">
-          {/* Position */}
+          {/* Position Field */}
           <FormRow
             name="position"
             type="text"
             value={position}
             handleChange={handleInputChange}
           />
-          {/* Company */}
+          {/* Company Field */}
           <FormRow
             name="company"
             type="text"
             value={company}
             handleChange={handleInputChange}
           />
-          {/* Job Location */}
+          {/* Job Location Field */}
           <FormRow
             name="jobLocation"
             labelText="Job Location"
@@ -90,14 +90,14 @@ const AddJob = () => {
             value={jobLocation}
             handleChange={handleInputChange}
           />
-          {/* Status */}
+          {/* Status Field */}
           <FormRowSelect
             name="status"
             listOptions={statusOptions}
             value={status}
             handleChange={handleInputChange}
           />
-          {/* Job Type */}
+          {/* Job Type Field */}
           <FormRowSelect
             name="jobType"
             labelText="Job Type"
@@ -110,7 +110,7 @@ const AddJob = () => {
             <button
               className="btn btn-block clear-btn"
               type="button"
-              onClick={() => dispatch(clearValues())}
+              onClick={() => dispatch(clearValues())} // handle clearing of input values
             >
               Clear
             </button>

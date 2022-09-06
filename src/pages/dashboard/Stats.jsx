@@ -7,11 +7,11 @@ const Stats = () => {
   const dispatch = useDispatch();
   const { isLoading, monthlyApplication } = useSelector(
     (store) => store.allJobs
-  );
+  ); // picking state needed in the allJobs Slice store
 
   useEffect(() => {
-    dispatch(getJobStats());
-  }, []);
+    dispatch(getJobStats()); // invoke the get all job stats ajax request
+  }, []); // render when the page loads
 
   if (isLoading) {
     <Loading center />;
@@ -19,6 +19,7 @@ const Stats = () => {
   return (
     <>
       <StatsContainer />
+      {/* show the chart when the monthly application length is bigger than 1 */}
       {monthlyApplication.length > 0 ? <ChartContainer /> : null}
     </>
   );

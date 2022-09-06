@@ -14,32 +14,33 @@ const initialState = {
   status: "pending",
   isEditing: false,
   editJobId: "",
-};
+}; // defining the state values for job store
 
-export const createJob = createAsyncThunk("job/createJob", createJobThunk);
+export const createJob = createAsyncThunk("job/createJob", createJobThunk); // new job post ajax request
 
-export const editJob = createAsyncThunk("job/editJob", editJobThunk);
+export const editJob = createAsyncThunk("job/editJob", editJobThunk); // edit job patch ajax request
 
-export const deleteJob = createAsyncThunk("job/deleteJob", deleteJobThunk);
+export const deleteJob = createAsyncThunk("job/deleteJob", deleteJobThunk); // delete job delete ajax request
 
 const jobSlice = createSlice({
-  name: "job",
-  initialState,
+  name: "job", // slice name
+  initialState, // define the store state in the slice
   reducers: {
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
-    },
+    }, // handling the input value change
     clearValues: () => {
       return {
         ...initialState,
-        jobLocation: getUserFromLocalStorage()?.location || "",
+        jobLocation: getUserFromLocalStorage()?.location || "", // getting location state form the user obj if they is
       };
-    },
+    }, // handling the clearing of value
     setJobEdit: (state, { payload }) => {
-      return { ...state, isEditing: true, ...payload };
-    },
-  },
-  // create New Jobs
+      return { ...state, isEditing: true, ...payload }; // return all the state value and the values on the server from the job obj
+    }, // making job ready for edit
+  }, // adding all simple reducer actions functionality
+
+  // create new job ajax request
   extraReducers: {
     [createJob.pending]: (state) => {
       state.isLoading = true;
@@ -52,14 +53,14 @@ const jobSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-    // delete job
+    // delete job ajax request
     [deleteJob.fulfilled]: () => {
       toast.success("Success! Job Removed");
     },
     [deleteJob.rejected]: ({ payload }) => {
       toast.error(payload);
     },
-    // editing
+    // editing job ajax request
     [editJob.pending]: (state) => {
       state.isLoading = true;
     },
@@ -74,6 +75,6 @@ const jobSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues, setJobEdit } = jobSlice.actions;
+export const { handleChange, clearValues, setJobEdit } = jobSlice.actions; // sending all job reducer action
 
 export default jobSlice.reducer;

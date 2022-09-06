@@ -8,7 +8,7 @@ const initialFilterSearch = {
   searchType: "all",
   sort: "latest",
   sortOptions: ["latest", "old", "a-z", "z-a"],
-};
+}; // defining the state values for filter search
 
 const initialState = {
   isLoading: false,
@@ -19,41 +19,42 @@ const initialState = {
   stats: {},
   monthlyApplication: [],
   ...initialFilterSearch,
-};
+}; // defining the state values for all jobs store
 
 export const getAllJobs = createAsyncThunk(
   "allJobs/getAllJobs",
   getAllJobsThunk
-);
+); // get all job ajax request
 
 export const getJobStats = createAsyncThunk(
   "allJobs/getJobStats",
   getAllStatsThunk
-);
+); // get job stats ajax request
 
 const allJobsSlice = createSlice({
-  name: "allJobs",
-  initialState,
+  name: "allJobs", // slice name
+  initialState, // define the store state in the slice
   reducers: {
     showLoading: (state) => {
       state.isLoading = true;
-    },
+    }, // make loading to true
     hideLoading: (state) => {
       state.isLoading = false;
-    },
+    }, // making loading to false
     clearJobFilter: (state) => {
       return { ...state, ...initialFilterSearch };
-    },
+    }, // clear all input state for the filter
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
       state.page = 1;
-    },
+    }, // handling the input value change and page state
     changePage: (state, { payload }) => {
       state.page = payload;
-    },
+    }, // set page state to the value on the server
     clearAllJobsValue: () => initialState,
   },
   extraReducers: {
+    // get all jobs ajax request
     [getAllJobs.pending]: (state) => {
       state.isLoading = true;
     },
@@ -68,7 +69,7 @@ const allJobsSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-    // get stats
+    // get all jobs stats ajax request
     [getJobStats.pending]: (state) => {
       state.isLoading = true;
     },
@@ -92,6 +93,6 @@ export const {
   handleChange,
   changePage,
   clearAllJobsValue,
-} = allJobsSlice.actions;
+} = allJobsSlice.actions; // sending allJob reducer action
 
 export default allJobsSlice.reducer;

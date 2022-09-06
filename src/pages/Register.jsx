@@ -14,40 +14,40 @@ const initialFormState = {
 };
 
 const Register = () => {
-  const [values, setValues] = useState(initialFormState);
-  const { isLoading, user } = useSelector((store) => store.user);
+  const [values, setValues] = useState(initialFormState); // define the user values state
+  const { isLoading, user } = useSelector((store) => store.user); // picking state available in the userSlice store
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleValues = (e) => {
     const key = e.target.name;
     const value = e.target.value;
-    setValues({ ...values, [key]: value });
+    setValues({ ...values, [key]: value }); // changing the input field to a new value
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
-      toast.error("Please Provide Credentials");
+      toast.error("Please Provide Credentials"); // display if all fields are empty
       return;
     }
     if (isMember) {
-      dispatch(loginUser({ email, password }));
+      dispatch(loginUser({ email, password })); // handle login POST request if the user is a member(user details already exist)
       return;
     }
-    dispatch(registerUser({ name, email, password }));
+    dispatch(registerUser({ name, email, password })); // handle register POST request to create a new user
   };
 
   const handleMemberToggle = () => {
-    setValues({ ...values, isMember: !values.isMember });
+    setValues({ ...values, isMember: !values.isMember }); // handling the toggling of member state
   };
 
   useEffect(() => {
     if (user) {
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 3000); // if user obj details exist, navigate to the dashboard (index page)
     }
   }, [user]); // navigate from register and login page to the dashboard page if the user exist
   return (
@@ -65,6 +65,7 @@ const Register = () => {
             handleChange={handleValues}
           />
         )}
+        {/*  display the name input field if the user is not a member and wants to register*/}
         {/* Email Field */}
         <FormRow
           type="email"
@@ -79,11 +80,9 @@ const Register = () => {
           value={values.password}
           handleChange={handleValues}
         />
-
         <button className="btn btn-block" disabled={isLoading}>
           {isLoading ? "Loading..." : "Submit"}
         </button>
-
         {/* <button
           className="btn btn-block btn-hipster"
           disabled={isLoading}

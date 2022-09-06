@@ -15,13 +15,13 @@ const JobsContainer = () => {
     searchStatus,
     searchType,
     search,
-  } = useSelector((store) => store.allJobs);
+  } = useSelector((store) => store.allJobs); // picking state available in the all job Slice store
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllJobs());
-  }, [page, sort, searchStatus, searchType, search]);
+    dispatch(getAllJobs()); // invoke the get all job ajax request
+  }, [page, sort, searchStatus, searchType, search]); // re-render based on the dependency list
 
   if (isLoading) {
     return (
@@ -31,11 +31,6 @@ const JobsContainer = () => {
     );
   }
 
-  if (jobs.length === 0) {
-    <Wrapper>
-      <h2>No Job Available To Display</h2>
-    </Wrapper>;
-  }
   return (
     <Wrapper>
       <h5>

@@ -6,28 +6,28 @@ import { FormRow, FormRowSelect } from "./index";
 
 const SearchContainer = () => {
   const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
-    useSelector((store) => store.allJobs);
+    useSelector((store) => store.allJobs); // picking state needed in the allJobs Slice store
 
-  const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
+  const { jobTypeOptions, statusOptions } = useSelector((store) => store.job); // picking state needed in the job Slice store
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (isLoading) return;
-    dispatch(handleChange({ name, value }));
+    if (isLoading) return; // if is loading pause accept no input
+    dispatch(handleChange({ name, value })); // changing the input field to a new value
   };
 
   const handleClearSubmit = (e) => {
     e.preventDefault();
-    dispatch(clearJobFilter());
+    dispatch(clearJobFilter()); // clear filed and reset all the filter input to default state
   };
   return (
     <Wrapper>
       <form className="form">
-        <h4>Search</h4>
+        <h4>Search Jobs</h4>
         <div className="form-center">
-          {/* Search */}
+          {/* Search Field */}
           <FormRow
             type="text"
             name="search"
@@ -35,7 +35,7 @@ const SearchContainer = () => {
             handleChange={handleSearch}
           />
 
-          {/* Status */}
+          {/* Status Field */}
           <FormRowSelect
             type="text"
             name="searchStatus"
@@ -45,7 +45,7 @@ const SearchContainer = () => {
             listOptions={["all", ...statusOptions]}
           />
 
-          {/* Job Type */}
+          {/* Job Type Field */}
           <FormRowSelect
             type="text"
             name="searchType"
@@ -55,7 +55,7 @@ const SearchContainer = () => {
             listOptions={["all", ...jobTypeOptions]}
           />
 
-          {/* Sort */}
+          {/* Sort Field */}
           <FormRowSelect
             type="text"
             name="sort"

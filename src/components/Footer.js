@@ -5,7 +5,8 @@ const Footer = () => {
   return (
     <section className="footer">
       <p>
-        Made with <BsSuitHeartFill /> by Zechariah. Copyright &copy;2022
+        Made with <BsSuitHeartFill style={{ color: "red" }} /> by Zechariah.
+        Copyright &copy;2022
       </p>
     </section>
   );
