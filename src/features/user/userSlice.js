@@ -5,8 +5,8 @@ import {
   setUserToLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorageData";
-import { statsInfoDefault } from "../allJobs/allJobsSlice";
 import {
+  clearAllStoreValueThunk,
   loginUserThunk,
   registerUserThunk,
   updateUserDetailsThunk,
@@ -39,6 +39,11 @@ export const updateUserDetails = createAsyncThunk(
   }
 );
 
+export const clearAllStoreValues = createAsyncThunk(
+  "user/clearStoreValue",
+  clearAllStoreValueThunk
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -50,9 +55,7 @@ const userSlice = createSlice({
       state.user = null;
       state.isSidebarOpen = false;
       removeUserFromLocalStorage();
-      if (payload) {
-        toast.success(payload);
-      }
+      toast.success(payload);
     },
   },
   extraReducers: {
@@ -100,6 +103,9 @@ const userSlice = createSlice({
     [updateUserDetails.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    [clearAllStoreValueThunk.rejected]: () => {
+      toast.error("There Was an Error...");
     },
   },
 });

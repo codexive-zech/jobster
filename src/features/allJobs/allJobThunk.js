@@ -1,4 +1,6 @@
-import customFetch from "../../utils/customFetch";
+import customFetch, {
+  checkForUnauthorizedResponse,
+} from "../../utils/customFetch";
 
 export const getAllJobsThunk = async (_, thunkApi) => {
   const { page, search, searchStatus, searchType, sort } =
@@ -11,7 +13,7 @@ export const getAllJobsThunk = async (_, thunkApi) => {
     const resp = await customFetch.get(url);
     return resp.data;
   } catch (error) {
-    return thunkApi.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkApi);
   }
 };
 
@@ -20,6 +22,6 @@ export const getAllStatsThunk = async (_, thunkApi) => {
     const resp = await customFetch.get("/jobs/stats");
     return resp.data;
   } catch (error) {
-    return thunkApi.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkApi);
   }
 };

@@ -17,10 +17,9 @@ const Landing = () => {
             Job <span>Tracking</span> App
           </h1>
           <p>
-            Salvia everyday carry echo park, ethical skateboard gentrify sus
-            franzen knausgaard. Raw denim drinking vinegar humblebrag, pickled
-            gatekeep neutra activated charcoal fixie twee organic post-ironic
-            beard craft beer pinterest.
+            Keep track of all the jobs you are applying for and manage your
+            resources, time, costs and profitability every time. Enjoy seamless
+            jobs management and insightful reporting.
           </p>
           <Link to="/register" className="btn btn-hero">
             Sign Up

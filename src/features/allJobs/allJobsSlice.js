@@ -46,10 +46,12 @@ const allJobsSlice = createSlice({
     },
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
+      state.page = 1;
     },
     changePage: (state, { payload }) => {
       state.page = payload;
     },
+    clearAllJobsValue: () => initialState,
   },
   extraReducers: {
     [getAllJobs.pending]: (state) => {
@@ -61,7 +63,6 @@ const allJobsSlice = createSlice({
       state.jobs = jobs;
       state.totalJobs = totalJobs;
       state.numOfPages = numOfPages;
-
     },
     [getAllJobs.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -90,7 +91,7 @@ export const {
   hideLoading,
   handleChange,
   changePage,
+  clearAllJobsValue,
 } = allJobsSlice.actions;
-
 
 export default allJobsSlice.reducer;
