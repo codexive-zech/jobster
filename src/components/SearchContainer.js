@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { clearJobFilter, handleChange } from "../features/allJobs/allJobsSlice";
 import Wrapper from "../assets/wrappers/SearchContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { FormRow, FormRowSelect } from "./index";
 
 const SearchContainer = () => {
-  const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
+  const [localSearch, setLocalSearch] = useState("");
+  const { isLoading, searchStatus, searchType, sort, sortOptions } =
     useSelector((store) => store.allJobs); // picking state needed in the allJobs Slice store
 
   const { jobTypeOptions, statusOptions } = useSelector((store) => store.job); // picking state needed in the job Slice store
@@ -14,7 +15,7 @@ const SearchContainer = () => {
   const handleSearch = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (isLoading) return; // if is loading pause accept no input
+
     dispatch(handleChange({ name, value })); // changing the input field to a new value
   };
 
@@ -22,6 +23,23 @@ const SearchContainer = () => {
     e.preventDefault();
     dispatch(clearJobFilter()); // clear filed and reset all the filter input to default state
   };
+
+  const debounce = () => {
+    console.log("debounce");
+    let timeoutId;
+    return (e) => {
+      setLocalSearch(e.target.value);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const name = e.target.name;
+        const value = e.target.value;
+        dispatch(handleChange({ name, value })); // changing the input field to a new value
+      }, 3000);
+    };
+  };
+
+  const optimizedDebounce = useMemo(() => debounce(), []);
+
   return (
     <Wrapper>
       <form className="form">
@@ -31,8 +49,8 @@ const SearchContainer = () => {
           <FormRow
             type="text"
             name="search"
-            value={search}
-            handleChange={handleSearch}
+            value={localSearch}
+            handleChange={optimizedDebounce}
           />
 
           {/* Status Field */}

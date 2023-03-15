@@ -14,6 +14,7 @@ const Wrapper = styled.aside`
     z-index: -1;
     opacity: 0;
     transition: var(--transition);
+    height: 100%;
   }
   .show-sidebar {
     z-index: 99;
